@@ -12,4 +12,4 @@ then run
 python main.py
 ```
 
-and begin the script by running main() on the command line.
+and begin the script by running main() inside the python program.
