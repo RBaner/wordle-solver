@@ -55,3 +55,6 @@ def main():
         possi = restrict_possibilities(exclude, include, placed, possi)
         output(sorted(possi))
     return(0)
+
+if __name__=="__main__":
+    main()
