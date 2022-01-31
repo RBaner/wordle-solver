@@ -1,5 +1,24 @@
 from english_words import english_words_set
 
+from english_words import english_words_set
+
+def score(word):
+    vowels = 'aeiou'
+    score = 0
+    for vowel in vowels:
+        if vowel in word.lower():
+            score += 1
+    return(score)
+
+def best_possi(possi):
+    scores = {}
+    for word in possi:
+        if score(word) not in scores:
+            scores[score(word)] = [word]
+        else:
+            scores[score(word)].append(word)
+    return(scores[max(scores)])
+
 def check_word(exclude,include,placed,word):
     """exclude is a dict of chars not in the final word separated by place
     include is a list of chars for which we know where they aren't
@@ -26,7 +45,7 @@ def output(words):
         print(word)
 
 def main():
-    exclude = {}
+    exclude = {0:[],1:[],2:[],3:[],4:[]}
     placed = {}
     include = []
     possi = [i.lower() for i in english_words_set if len(i) == 5]
@@ -39,10 +58,8 @@ def main():
             break
         for index in range(len(results)):
             if results[index] == 'b':
-                if index not in exclude:
-                    exclude[index] = [word_tried[index]]
-                else:
-                    exclude[index].append(word_tried[index])
+                for i in exclude:
+                    exclude[i].append(word_tried[index])
             elif results[index] == 'y':
                 if index not in exclude:
                     exclude[index] = [word_tried[index]]
@@ -53,7 +70,7 @@ def main():
                 placed[index] = word_tried[index]
         #print(placed)
         possi = restrict_possibilities(exclude, include, placed, possi)
-        output(sorted(possi))
+        output(sorted(best_possi(possi)))
     return(0)
 
 if __name__=="__main__":
