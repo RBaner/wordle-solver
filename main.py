@@ -1,7 +1,5 @@
 from english_words import english_words_set
 
-from english_words import english_words_set
-
 def score(word):
     vowels = 'aeiou'
     score = 0
