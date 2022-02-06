@@ -17,6 +17,23 @@ def best_possi(possi):
             scores[score(word)].append(word)
     return(scores[max(scores)])
 
+def score(word):
+    vowels = 'aeiou'
+    score = 0
+    for vowel in vowels:
+        if vowel in word.lower():
+            score += 1
+    return(score)
+
+def best_possi(possi):
+    scores = {}
+    for word in possi:
+        if score(word) not in scores:
+            scores[score(word)] = [word]
+        else:
+            scores[score(word)].append(word)
+    return(scores[max(scores)])
+
 def check_word(exclude,include,placed,word):
     """exclude is a dict of chars not in the final word separated by place
     include is a list of chars for which we know where they aren't
